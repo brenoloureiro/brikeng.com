@@ -1,1 +1,571 @@
-<h1>Brik</h1>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brik — Energia Eólica e Solar | Medição, Certificação e Desenvolvimento</title>
+<meta name="description" content="Quase 20 anos em energia eólica e solar. 10+ GW desenvolvidos, 10+ GW certificados, 100+ campanhas de medição. Engenharia + Inteligência de Dados.">
+<meta name="keywords" content="energia eólica, energia solar, certificação bankable, curtailment, medição anemométrica, solarimétrica, BrazilGrid, machine learning, previsão">
+<meta property="og:title" content="Brik — Energia Eólica e Solar">
+<meta property="og:description" content="Da medição em campo ao forecasting com ML. Quase 20 anos em energia eólica e solar no Brasil.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://brikeng.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e14;
+    --bg-panel: #0d1117;
+    --border: #1e3a2f;
+    --border-bright: #2d5a42;
+    --text: #b0c4b1;
+    --text-bright: #d4e8d4;
+    --accent: #00d26a;
+    --accent-dim: #00a854;
+    --accent-glow: rgba(0, 210, 106, 0.15);
+    --link: #00d26a;
+    --link-hover: #33ff99;
+    --amber: #e8a838;
+    --red: #ff6b6b;
+    --cyan: #5ccfe6;
+    --comment: #5c6773;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 15px; scroll-behavior: smooth; }
+
+  body {
+    font-family: 'IBM Plex Mono', 'JetBrains Mono', 'Courier New', monospace;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  .container { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem; }
+
+  /* LANG TOGGLE */
+  .lang-toggle { text-align: right; margin-bottom: 0.5rem; font-size: 0.78rem; }
+  .lang-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--comment);
+    font-family: inherit;
+    font-size: 0.78rem;
+    padding: 0.25rem 0.6rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .lang-btn:hover, .lang-btn.active {
+    color: var(--accent);
+    border-color: var(--accent-dim);
+    background: var(--accent-glow);
+  }
+
+  /* HEADER */
+  .header {
+    border: 1px solid var(--border-bright);
+    padding: 2rem 1.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    background: var(--bg-panel);
+  }
+  .header::before {
+    content: '┌─── BRIK ───────────────────────────────────────┐';
+    position: absolute;
+    top: -0.7rem; left: 0.5rem;
+    background: var(--bg);
+    padding: 0 0.5rem;
+    color: var(--accent);
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .logo {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.3rem;
+    line-height: 1;
+    text-shadow: 0 0 20px var(--accent-glow);
+  }
+  .logo-sub {
+    color: var(--comment);
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+    letter-spacing: 0.05rem;
+  }
+  .tagline {
+    color: var(--text-bright);
+    font-size: 0.95rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--border);
+  }
+
+  /* BRAZILGRID CTA BANNER */
+  .brazilgrid-banner {
+    border: 2px solid var(--accent);
+    background: linear-gradient(135deg, rgba(0,210,106,0.08) 0%, rgba(0,210,106,0.02) 50%, transparent 100%);
+    padding: 2rem 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    position: relative;
+    animation: pulse-border 3s ease-in-out infinite;
+  }
+  @keyframes pulse-border {
+    0%, 100% { border-color: var(--accent-dim); box-shadow: 0 0 0px var(--accent-glow); }
+    50% { border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
+  }
+  .brazilgrid-banner-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.15rem;
+    text-shadow: 0 0 20px var(--accent-glow);
+  }
+  .brazilgrid-banner-sub {
+    color: var(--text);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .brazilgrid-banner-waste {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    color: var(--red);
+    font-weight: 700;
+  }
+  .brazilgrid-banner-waste .num { font-size: 1.6rem; }
+  .cta-button {
+    display: inline-block;
+    margin-top: 1.2rem;
+    padding: 0.7rem 2rem;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.1rem;
+    transition: all 0.3s;
+  }
+  .cta-button:hover {
+    background: var(--accent);
+    color: var(--bg);
+    text-shadow: none;
+    box-shadow: 0 0 25px var(--accent-glow);
+  }
+
+  /* NAV */
+  .nav {
+    margin-bottom: 2rem;
+    padding: 0.6rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 1.2rem;
+  }
+  .nav a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+  .nav a::before { content: '> '; color: var(--comment); }
+  .nav a:hover { color: var(--link-hover); text-shadow: 0 0 8px var(--accent-glow); }
+
+  /* SECTIONS */
+  .section {
+    margin-bottom: 2.5rem;
+    border: 1px solid var(--border);
+    background: var(--bg-panel);
+    padding: 1.5rem;
+    position: relative;
+  }
+  .section-label {
+    position: absolute;
+    top: -0.65rem; left: 1rem;
+    background: var(--bg-panel);
+    padding: 0 0.5rem;
+    color: var(--amber);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+  }
+  h2 {
+    color: var(--text-bright);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px dashed var(--border);
+  }
+  h2::before { content: '## '; color: var(--accent-dim); }
+
+  /* STATS */
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1rem 0; }
+  .stat {
+    text-align: center;
+    padding: 1rem 0.5rem;
+    border: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .stat-num {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    text-shadow: 0 0 15px var(--accent-glow);
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--comment);
+    margin-top: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    line-height: 1.3;
+  }
+
+  /* SERVICES */
+  .service {
+    margin-bottom: 1.2rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--border);
+    transition: border-color 0.3s;
+  }
+  .service:hover { border-left-color: var(--accent); }
+  .service:last-child { margin-bottom: 0; }
+  .service-name { color: var(--cyan); font-weight: 700; font-size: 0.9rem; }
+  .service-name::before { content: '→ '; color: var(--accent); }
+  .service-desc { color: var(--text); font-size: 0.8rem; margin-top: 0.2rem; }
+
+  /* TOOLS */
+  .tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.5rem; }
+  .tools-col h3 { color: var(--amber); font-size: 0.8rem; margin-bottom: 0.4rem; font-weight: 700; }
+  .tools-col h3::before { content: '// '; color: var(--comment); }
+  .tools-list { font-size: 0.78rem; color: var(--text); line-height: 1.8; }
+  .tools-list span { color: var(--comment); }
+
+  /* BRAZILGRID BOX */
+  .brazilgrid-box {
+    border: 1px solid var(--accent-dim);
+    background: linear-gradient(135deg, rgba(0,210,106,0.03) 0%, transparent 60%);
+    padding: 1.5rem;
+    margin-top: 1rem;
+  }
+  .brazilgrid-title { font-size: 1.3rem; font-weight: 700; color: var(--accent); letter-spacing: 0.1rem; }
+  .brazilgrid-title span { color: var(--comment); font-weight: 400; font-size: 0.8rem; }
+  .brazilgrid-desc { margin-top: 0.8rem; font-size: 0.85rem; }
+  .brazilgrid-stats { display: flex; gap: 1.5rem; margin-top: 1rem; flex-wrap: wrap; }
+  .bg-stat { font-size: 0.78rem; }
+  .bg-stat strong { color: var(--accent); }
+
+  /* LINKS / CONTACT */
+  a { color: var(--link); text-decoration: none; transition: all 0.2s; }
+  a:hover { color: var(--link-hover); text-shadow: 0 0 8px var(--accent-glow); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.3rem 1rem;
+    font-size: 0.85rem;
+  }
+  .contact-key { color: var(--comment); text-align: right; }
+  .contact-val { color: var(--text-bright); }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 2rem;
+    padding: 1rem 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--comment);
+  }
+  .cursor-blink { animation: blink 1s step-end infinite; color: var(--accent); }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .ascii-divider {
+    color: var(--border-bright);
+    font-size: 0.7rem;
+    text-align: center;
+    margin: 1.5rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  /* LANGUAGE */
+  [data-lang-en] { display: none; }
+  body.en [data-lang-pt] { display: none; }
+  body.en [data-lang-en] { display: revert; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    html { font-size: 14px; }
+    .container { padding: 1rem 0.8rem; }
+    .header { padding: 1.5rem 1rem; }
+    .header::before { content: '┌── BRIK ──┐'; font-size: 0.7rem; }
+    .logo { font-size: 2rem; letter-spacing: 0.2rem; }
+    .stats { grid-template-columns: 1fr; gap: 0.6rem; }
+    .stat {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 0.8rem 1rem; text-align: left;
+    }
+    .stat-num { font-size: 1.4rem; }
+    .stat-label { margin-top: 0; }
+    .tools-grid { grid-template-columns: 1fr; }
+    .nav { gap: 0.2rem 0.8rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 0.1rem; }
+    .contact-key { text-align: left; }
+    .contact-val { margin-bottom: 0.5rem; }
+    .brazilgrid-stats { flex-direction: column; gap: 0.5rem; }
+    .section { padding: 1.2rem 1rem; }
+    .brazilgrid-banner { padding: 1.5rem 1rem; }
+    .brazilgrid-banner-title { font-size: 1.2rem; }
+    .brazilgrid-banner-waste .num { font-size: 1.3rem; }
+  }
+
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  @media print {
+    body { background: white; color: #333; }
+    body::before { display: none; }
+    .section { border-color: #ccc; }
+    a { color: #333; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- LANG -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btn-pt" onclick="setLang('pt')">PT</button>
+    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header" id="top">
+    <div class="logo">BRIK</div>
+    <div class="logo-sub">
+      <span data-lang-pt>Energia Eólica e Solar | Da Medição em Campo ao Forecasting com ML</span>
+      <span data-lang-en>Wind &amp; Solar Energy | From Field Measurements to ML Forecasting</span>
+    </div>
+    <div class="tagline">
+      <span data-lang-pt>Quase 20 anos medindo, certificando e desenvolvendo projetos de energia eólica e solar no Brasil.</span>
+      <span data-lang-en>Nearly 20 years measuring, certifying, and developing wind and solar energy projects across Brazil.</span>
+    </div>
+  </header>
+
+  <!-- BRAZILGRID BANNER -->
+  <div class="brazilgrid-banner">
+    <div class="brazilgrid-banner-title">▸ BRAZILGRID</div>
+    <div class="brazilgrid-banner-sub">
+      <span data-lang-pt>Plataforma de dados e inteligência para o setor elétrico brasileiro. Curtailment, geração e informações de cada usina eólica e solar do país.</span>
+      <span data-lang-en>Data and intelligence platform for the Brazilian power sector. Curtailment, generation, and insights for every wind and solar plant in the country.</span>
+    </div>
+    <div class="brazilgrid-banner-waste">
+      <span data-lang-pt><span class="num">R$ 9,6 bilhões</span> desperdiçados em energia limpa no Nordeste</span>
+      <span data-lang-en><span class="num">R$ 9.6 billion</span> wasted in clean energy in Brazil's Northeast</span>
+    </div>
+    <a href="https://brazilgrid.com" class="cta-button">
+      <span data-lang-pt>ACESSAR BRAZILGRID →</span>
+      <span data-lang-en>EXPLORE BRAZILGRID →</span>
+    </a>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="#about"><span data-lang-pt>sobre</span><span data-lang-en>about</span></a>
+    <a href="#services"><span data-lang-pt>serviços</span><span data-lang-en>services</span></a>
+    <a href="#tools"><span data-lang-pt>ferramentas</span><span data-lang-en>tools</span></a>
+    <a href="#brazilgrid">brazilgrid</a>
+    <a href="#contact"><span data-lang-pt>contato</span><span data-lang-en>contact</span></a>
+  </nav>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <span class="section-label">01</span>
+    <h2><span data-lang-pt>Sobre</span><span data-lang-en>About</span></h2>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num">10+</div>
+        <div class="stat-label">GW<br><span data-lang-pt>Desenvolvidos</span><span data-lang-en>Developed</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">10+</div>
+        <div class="stat-label">GW <span data-lang-pt>Certificados</span><span data-lang-en>Certified</span><br>(Bankable)</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100+</div>
+        <div class="stat-label"><span data-lang-pt>Campanhas de<br>Medição</span><span data-lang-en>Measurement<br>Campaigns</span></div>
+      </div>
+    </div>
+    <p style="margin-top:1rem; font-size:0.85rem;">
+      <span data-lang-pt>A Brik combina engenharia de campo com ciência de dados moderna. Desenvolvemos e certificamos alguns dos maiores portfólios eólicos e solares do Brasil, instalamos torres meteorológicas do semiárido nordestino aos pampas gaúchos, e construímos uma plataforma de dados que rastreia cada megawatt-hora curtailado no país.</span>
+      <span data-lang-en>Brik combines deep field engineering with modern data science. We've developed and certified some of the largest wind and solar portfolios in Brazil, installed meteorological towers from the semiarid Northeast to the southern highlands, and built a data platform that tracks every curtailed megawatt-hour in the country.</span>
+    </p>
+    <p style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-bright); font-weight:700;">
+      <span data-lang-pt>Engenharia de campo + inteligência de dados. É isso que a Brik faz.</span>
+      <span data-lang-en>Field engineering + data intelligence. That's what Brik does.</span>
+    </p>
+  </section>
+
+  <div class="ascii-divider">─────────── ◆ ───────────</div>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <span class="section-label">02</span>
+    <h2><span data-lang-pt>Serviços</span><span data-lang-en>Services</span></h2>
+
+    <div class="service">
+      <div class="service-name"><span data-lang-pt>Campanhas de Medição</span><span data-lang-en>Measurement Campaigns</span></div>
+      <div class="service-desc">
+        <span data-lang-pt>Projeto, instalação e operação de torres anemométricas (até 120m) e estações solarimétricas. Fornecimento de equipamentos. Controle de qualidade de dados e gap-filling. Monitoramento operacional de parques.</span>
+        <span data-lang-en>Design, installation, and operation of anemometric towers (up to 120m) and solarimetric monitoring stations. Equipment supply. Data quality control and gap-filling. Operational plant monitoring.</span>
+      </div>
+    </div>
+
+    <div class="service">
+      <div class="service-name"><span data-lang-pt>Certificação de Energia (Bankable)</span><span data-lang-en>Bankable Energy Reports</span></div>
+      <div class="service-desc">
+        <span data-lang-pt>Certificação independente de produção de energia eólica e solar para financiamento, M&A e due diligence. Conforme IEC 61400 e IEC 61724. Utilizado por bancos, investidores e desenvolvedores.</span>
+        <span data-lang-en>Independent wind and solar energy production certification for financing, M&A, and due diligence. Compliant with IEC 61400 and IEC 61724. Used by banks, investors, and developers for project financing decisions.</span>
+      </div>
+    </div>
+
+    <div class="service">
+      <div class="service-name"><span data-lang-pt>Desenvolvimento de Projetos</span><span data-lang-en>Project Development</span></div>
+      <div class="service-desc">
+        <span data-lang-pt>Do greenfield à outorga. Avaliação de recurso (WAsP, WindPRO, PVSyst, SAM), micrositing, estimativa de produção, estudos de ruído e sombreamento, licenciamento ambiental, conexão à rede, outorga ANEEL e habilitação EPE.</span>
+        <span data-lang-en>From greenfield to construction-ready. Resource assessment (WAsP, WindPRO, PVSyst, SAM), micrositing, energy yield estimation, noise and shadow flicker studies, environmental licensing, grid connection, ANEEL permits and EPE auction registration.</span>
+      </div>
+    </div>
+
+    <div class="service">
+      <div class="service-name"><span data-lang-pt>Verificação de Performance</span><span data-lang-en>Performance Verification</span></div>
+      <div class="service-desc">
+        <span data-lang-pt>Análise de performance operacional de parques eólicos e solares. Reconciliação produção vs. expectativa, análise de disponibilidade, rastreamento de degradação, compliance de garantia. Pareceres técnicos independentes para disputas e seguros.</span>
+        <span data-lang-en>Operational performance analysis for wind and solar farms. Production vs. expectation reconciliation, availability analysis, degradation tracking, warranty compliance. Independent technical opinions for disputes and insurance claims.</span>
+      </div>
+    </div>
+
+    <div class="service">
+      <div class="service-name"><span data-lang-pt>Inteligência de Dados</span><span data-lang-en>Data Intelligence</span></div>
+      <div class="service-desc">
+        <span data-lang-pt>Plataforma de analytics para o setor elétrico brasileiro. Curtailment, previsão de geração e preço com machine learning, dashboards em tempo real e mapeamento de exposição corporativa. Veja o <a href="#brazilgrid">BrazilGrid</a> abaixo.</span>
+        <span data-lang-en>Analytics platform for the Brazilian power sector. Curtailment analytics, generation and price forecasting with machine learning, real-time dashboards, and corporate exposure mapping. See <a href="#brazilgrid">BrazilGrid</a> below.</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="ascii-divider">─────────── ◆ ───────────</div>
+
+  <!-- TOOLS -->
+  <section class="section" id="tools">
+    <span class="section-label">03</span>
+    <h2><span data-lang-pt>Ferramentas</span><span data-lang-en>Tools &amp; Stack</span></h2>
+    <div class="tools-grid">
+      <div class="tools-col">
+        <h3><span data-lang-pt>Energia</span><span data-lang-en>Energy</span></h3>
+        <div class="tools-list">
+          WAsP <span>·</span> WindPRO <span>·</span> PVSyst <span>·</span> SAM <span>·</span> PySAM <span>·</span> pvlib <span>·</span> windpowerlib <span>·</span> PyWake <span>·</span> FLORIS
+        </div>
+      </div>
+      <div class="tools-col">
+        <h3><span data-lang-pt>Dados</span><span data-lang-en>Data</span></h3>
+        <div class="tools-list">
+          Python <span>·</span> Polars <span>·</span> ClickHouse <span>·</span> Prefect <span>·</span> Docker <span>·</span> Neo4j <span>·</span> FastAPI <span>·</span> scikit-learn <span>·</span> LightGBM <span>·</span> Git
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ascii-divider">─────────── ◆ ───────────</div>
+
+  <!-- BRAZILGRID -->
+  <section class="section" id="brazilgrid">
+    <span class="section-label">04</span>
+    <h2>BrazilGrid</h2>
+    <div class="brazilgrid-box">
+      <div class="brazilgrid-title">BrazilGrid <span>// data platform</span></div>
+      <div class="brazilgrid-desc">
+        <span data-lang-pt>Plataforma de dados e inteligência para o setor elétrico brasileiro. Rastreia curtailment, geração e precificação de cada usina eólica e solar conectada ao SIN. Construída para responder uma pergunta: quanta energia limpa o Brasil está desperdiçando, e por quê?</span>
+        <span data-lang-en>Data and intelligence platform for the Brazilian power sector. Tracks curtailment, generation, and pricing for every wind and solar plant connected to the national grid. Built to answer one question: how much clean energy is Brazil wasting, and why?</span>
+      </div>
+      <div class="brazilgrid-stats">
+        <div class="bg-stat"><strong>1.700+</strong> <span data-lang-pt>usinas rastreadas</span><span data-lang-en>plants tracked</span></div>
+        <div class="bg-stat"><strong>60M+</strong> <span data-lang-pt>registros</span><span data-lang-en>records</span></div>
+        <div class="bg-stat"><strong>26</strong> <span data-lang-pt>meses de dados</span><span data-lang-en>months of data</span></div>
+        <div class="bg-stat"><strong>ML</strong> forecasting</div>
+      </div>
+      <p style="margin-top:1rem; font-size:0.85rem;">
+        <span data-lang-pt>Descoberta principal: o Nordeste brasileiro desperdiçou <strong style="color:var(--red)">R$ 9,6 bilhões</strong> em energia renovável curtailada desde outubro de 2023. A geração renovável cresceu 7% enquanto o curtailment saltou 107%.</span>
+        <span data-lang-en>Key finding: Brazil's Northeast wasted <strong style="color:var(--red)">R$ 9.6 billion</strong> in curtailed renewable energy since October 2023. Renewable generation grew 7% while curtailment jumped 107%.</span>
+      </p>
+      <p style="margin-top:1rem; text-align:center;">
+        <a href="https://brazilgrid.com" class="cta-button">
+          <span data-lang-pt>ACESSAR BRAZILGRID →</span>
+          <span data-lang-en>EXPLORE BRAZILGRID →</span>
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <div class="ascii-divider">─────────── ◆ ───────────</div>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <span class="section-label">05</span>
+    <h2><span data-lang-pt>Contato</span><span data-lang-en>Contact</span></h2>
+    <div class="contact-grid">
+      <div class="contact-key">email</div>
+      <div class="contact-val"><a href="/cdn-cgi/l/email-protection#9efcecfbf0f1defcecf7f5fbf0f9b0fdf1f3"><span class="__cf_email__" data-cfemail="583a2a3d3637183a2a31333d363f763b3735">[email&#160;protected]</span></a></div>
+
+      <div class="contact-key">web</div>
+      <div class="contact-val"><a href="https://brazilgrid.com">brazilgrid.com</a></div>
+
+      <div class="contact-key">linkedin</div>
+      <div class="contact-val"><a href="https://www.linkedin.com/in/brenobrik" target="_blank" rel="noopener">linkedin.com/in/brenobrik</a></div>
+
+      <div class="contact-key"><span data-lang-pt>empresa</span><span data-lang-en>company</span></div>
+      <div class="contact-val"><a href="https://www.linkedin.com/company/brik-engenharia-e-consultoria-ltda/" target="_blank" rel="noopener">linkedin.com/company/brik</a></div>
+
+      <div class="contact-key"><span data-lang-pt>local</span><span data-lang-en>location</span></div>
+      <div class="contact-val">Recife, Brasil</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2014–2026 Brik. <span data-lang-pt>Engenharia de campo + inteligência de dados.</span><span data-lang-en>Field engineering + data intelligence.</span><span class="cursor-blink">█</span></p>
+    <p style="margin-top:0.3rem;"><a href="#top" style="color:var(--comment);">↑ <span data-lang-pt>voltar ao topo</span><span data-lang-en>back to top</span></a></p>
+  </footer>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function setLang(lang) {
+  if (lang === 'en') {
+    document.body.classList.add('en');
+    document.documentElement.lang = 'en';
+  } else {
+    document.body.classList.remove('en');
+    document.documentElement.lang = 'pt-BR';
+  }
+  document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
+  document.getElementById('btn-en').cl
