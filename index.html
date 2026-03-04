@@ -626,7 +626,7 @@
     <h2><span data-lang-pt>Contato</span><span data-lang-en>Contact</span></h2>
     <div class="contact-grid">
       <div class="contact-key">email</div>
-      <div class="contact-val"><a href="/cdn-cgi/l/email-protection#9efcecfbf0f1defcecf7f5fbf0f9b0fdf1f3"><span class="__cf_email__" data-cfemail="583a2a3d3637183a2a31333d363f763b3735">[email&#160;protected]</span></a></div>
+      <div class="contact-val"><a id="email-link" href="#">carregando...</a></div>
 
       <div class="contact-key">web</div>
       <div class="contact-val"><a href="https://brazilgrid.com">brazilgrid.com</a></div>
@@ -650,7 +650,7 @@
 
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 function setLang(lang) {
   if (lang === 'en') {
     document.body.classList.add('en');
@@ -660,4 +660,14 @@ function setLang(lang) {
     document.documentElement.lang = 'pt-BR';
   }
   document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
-  document.getElementById('btn-en').cl
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+}
+// Email anti-obfuscation
+(function(){
+  var u='breno',d='brikeng.com',e=u+'@'+d;
+  var el=document.getElementById('email-link');
+  if(el){el.href='mailto:'+e;el.textContent=e;}
+})();
+</script>
+</body>
+</html>
