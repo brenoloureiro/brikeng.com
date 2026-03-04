@@ -54,6 +54,77 @@
   .container { max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem; }
 
   /* LANG TOGGLE */
+  /* SHARED NAVBAR */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10, 14, 20, 0.94);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.2rem;
+  }
+  .topbar-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+  }
+  .topbar-brands {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .topbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--text-bright);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.02rem;
+  }
+  .topbar-brand img {
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .topbar-brand:hover { color: var(--accent); }
+  .topbar-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .topbar-links a {
+    color: var(--comment);
+    font-size: 0.78rem;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .topbar-links a::before { content: none; }
+  .topbar-links a:hover { color: var(--accent); text-shadow: none; }
+  .topbar-links .tb-cta {
+    color: var(--accent);
+    border: 1px solid var(--accent-dim);
+    padding: 0.25rem 0.7rem;
+    font-weight: 700;
+  }
+  .topbar-links .tb-cta:hover {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  @media (max-width: 600px) {
+    .topbar-brands { gap: 0.75rem; }
+    .topbar-brand { font-size: 0.85rem; }
+    .topbar-brand img { height: 24px; width: 24px; }
+    .topbar-links { gap: 0.6rem; }
+    .topbar-links a { font-size: 0.72rem; }
+  }
+
   .lang-toggle { text-align: right; margin-bottom: 0.5rem; font-size: 0.78rem; }
   .lang-btn {
     background: none;
@@ -349,6 +420,27 @@
 </style>
 </head>
 <body>
+
+<nav class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-brands">
+      <a href="https://brikeng.com" class="topbar-brand">
+        <img src="logo_brik.png" alt="Brik">
+        <span>BRIK Engenharia</span>
+      </a>
+      <a href="https://brazilgrid.com" class="topbar-brand">
+        <img src="og-brazilgrid.jpg" alt="BrazilGrid">
+        <span>BrazilGrid</span>
+      </a>
+    </div>
+    <div class="topbar-links">
+      <a href="#services"><span data-lang-pt>Serviços</span><span data-lang-en>Services</span></a>
+      <a href="#tools"><span data-lang-pt>Ferramentas</span><span data-lang-en>Tools</span></a>
+      <a href="#contact"><span data-lang-pt>Contato</span><span data-lang-en>Contact</span></a>
+      <a href="https://brazilgrid.com" class="tb-cta">BrazilGrid →</a>
+    </div>
+  </div>
+</nav>
 
 <div class="container">
 
