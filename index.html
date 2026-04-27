@@ -3,13 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brik — Energia Eólica e Solar | Medição, Certificação e Desenvolvimento</title>
-<meta name="description" content="Quase 20 anos em energia eólica e solar. 10+ GW desenvolvidos, 10+ GW certificados, 100+ campanhas de medição. Engenharia + Inteligência de Dados.">
-<meta name="keywords" content="energia eólica, energia solar, certificação bankable, curtailment, medição anemométrica, solarimétrica, BrazilGrid, machine learning, previsão">
-<meta property="og:title" content="Brik — Energia Eólica e Solar">
-<meta property="og:description" content="Da medição em campo ao forecasting com ML. Quase 20 anos em energia eólica e solar no Brasil.">
+<title>BRIK | Engenharia em Renováveis e Armazenamento de Energia</title>
+<meta name="description" content="Quase 20 anos em medição, certificação e desenvolvimento de projetos eólicos e solares no Brasil. Consultoria técnico-econômica em armazenamento (BESS), curtailment e exposição a PLD.">
+<meta name="keywords" content="energia eólica, energia solar, certificação bankable, curtailment, medição anemométrica, solarimétrica, BrazilGrid, machine learning, previsão, BESS, armazenamento de energia, bateria, PLD, hibridização, Reserva de Capacidade">
+<meta property="og:title" content="BRIK | Engenharia em Renováveis e Armazenamento de Energia">
+<meta property="og:description" content="Quase 20 anos em medição, certificação e desenvolvimento de projetos eólicos e solares no Brasil. Consultoria técnico-econômica em armazenamento (BESS), curtailment e exposição a PLD.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://brikeng.com">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -471,8 +473,8 @@
       <span data-lang-en>Data and intelligence platform for the Brazilian power sector. Curtailment, generation, and insights for every wind and solar plant in the country.</span>
     </div>
     <div class="brazilgrid-banner-waste">
-      <span data-lang-pt><span class="num">R$ 9,6 bilhões</span> desperdiçados em energia limpa no Nordeste</span>
-      <span data-lang-en><span class="num">R$ 9.6 billion</span> wasted in clean energy in Brazil's Northeast</span>
+      <span data-lang-pt><span class="num">Quase R$ 10 bilhões</span> desperdiçados em energia limpa no Nordeste</span>
+      <span data-lang-en><span class="num">Nearly R$ 10 billion</span> wasted in clean energy in Brazil's Northeast</span>
     </div>
     <a href="https://brazilgrid.com" class="cta-button">
       <span data-lang-pt>ACESSAR BRAZILGRID →</span>
@@ -606,8 +608,8 @@
         <div class="bg-stat"><strong>ML</strong> forecasting</div>
       </div>
       <p style="margin-top:1rem; font-size:0.85rem;">
-        <span data-lang-pt>Descoberta principal: o Nordeste brasileiro desperdiçou <strong style="color:var(--red)">R$ 9,6 bilhões</strong> em energia renovável curtailada desde outubro de 2023. A geração renovável cresceu 7% enquanto o curtailment saltou 107%.</span>
-        <span data-lang-en>Key finding: Brazil's Northeast wasted <strong style="color:var(--red)">R$ 9.6 billion</strong> in curtailed renewable energy since October 2023. Renewable generation grew 7% while curtailment jumped 107%.</span>
+        <span data-lang-pt>Descoberta principal: o Nordeste brasileiro desperdiçou <strong style="color:var(--red)">quase R$ 10 bilhões</strong> em energia renovável curtailada desde outubro de 2023. A geração renovável cresceu 7% enquanto o curtailment saltou 107%.</span>
+        <span data-lang-en>Key finding: Brazil's Northeast wasted <strong style="color:var(--red)">nearly R$ 10 billion</strong> in curtailed renewable energy since October 2023. Renewable generation grew 7% while curtailment jumped 107%.</span>
       </p>
       <p style="margin-top:1rem; text-align:center;">
         <a href="https://brazilgrid.com" class="cta-button">
@@ -651,7 +653,16 @@
 </div>
 
 <script>
+var META_PT = {
+  title: 'BRIK | Engenharia em Renováveis e Armazenamento de Energia',
+  desc: 'Quase 20 anos em medição, certificação e desenvolvimento de projetos eólicos e solares no Brasil. Consultoria técnico-econômica em armazenamento (BESS), curtailment e exposição a PLD.'
+};
+var META_EN = {
+  title: 'BRIK | Renewable Energy and Storage Engineering',
+  desc: 'Nearly 20 years in wind and solar measurement, certification, and project development in Brazil. Technical-economic consulting on battery energy storage (BESS), curtailment, and PLD exposure.'
+};
 function setLang(lang) {
+  var meta = lang === 'en' ? META_EN : META_PT;
   if (lang === 'en') {
     document.body.classList.add('en');
     document.documentElement.lang = 'en';
@@ -659,6 +670,13 @@ function setLang(lang) {
     document.body.classList.remove('en');
     document.documentElement.lang = 'pt-BR';
   }
+  document.title = meta.title;
+  var mdesc = document.querySelector('meta[name="description"]');
+  if (mdesc) mdesc.setAttribute('content', meta.desc);
+  var ogt = document.querySelector('meta[property="og:title"]');
+  if (ogt) ogt.setAttribute('content', meta.title);
+  var ogd = document.querySelector('meta[property="og:description"]');
+  if (ogd) ogd.setAttribute('content', meta.desc);
   document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
   document.getElementById('btn-en').classList.toggle('active', lang === 'en');
 }
