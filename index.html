@@ -411,6 +411,22 @@
     .brazilgrid-banner-waste .num { font-size: 1.3rem; }
   }
 
+  /* FORMS */
+  .form-block { margin-top: 1.2rem; padding-top: 1rem; border-top: 1px dashed var(--border); }
+  .form-block-title { color: var(--amber); font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .form-block-title::before { content: '// '; color: var(--comment); }
+  .form-block-desc { font-size: 0.8rem; margin-bottom: 0.8rem; color: var(--text); }
+  .form-block form { display: flex; flex-direction: column; gap: 0.5rem; }
+  .form-block input, .form-block textarea {
+    font-family: inherit; font-size: 0.85rem; background: var(--bg);
+    border: 1px solid var(--border); color: var(--text-bright); padding: 0.5rem 0.7rem;
+  }
+  .form-block input:focus, .form-block textarea:focus {
+    outline: none; border-color: var(--accent-dim); box-shadow: 0 0 8px var(--accent-glow);
+  }
+  .form-block input::placeholder, .form-block textarea::placeholder { color: var(--comment); }
+  button.cta-button { background: transparent; cursor: pointer; margin-top: 0.4rem; align-self: flex-start; }
+
   ::selection { background: var(--accent); color: var(--bg); }
 
   @media print {
@@ -657,6 +673,30 @@
         <span data-lang-pt>Descoberta principal: o Nordeste brasileiro desperdiçou <strong style="color:var(--red)">quase R$ 10 bilhões</strong> em energia renovável curtailada desde outubro de 2023. A geração renovável cresceu 7% enquanto o curtailment saltou 107%.</span>
         <span data-lang-en>Key finding: Brazil's Northeast wasted <strong style="color:var(--red)">nearly R$ 10 billion</strong> in curtailed renewable energy since October 2023. Renewable generation grew 7% while curtailment jumped 107%.</span>
       </p>
+
+      <div class="form-block">
+        <div class="form-block-title">
+          <span data-lang-pt>Relatório de Curtailment e Oportunidades BESS</span><span data-lang-en>Curtailment &amp; BESS Opportunities Report</span>
+        </div>
+        <div class="form-block-desc">
+          <span data-lang-pt>Receba periodicamente um panorama do curtailment no Sistema Interligado Nacional, spread PLD/CMO por subsistema e mapeamento de oportunidades de armazenamento. Direto para sua caixa de entrada, sem spam.</span>
+          <span data-lang-en>Get periodic insights on curtailment in the Brazilian grid, PLD/CMO spread by subsystem, and battery storage opportunity mapping. Straight to your inbox, no spam.</span>
+        </div>
+        <form action="https://buttondown.email/api/emails/embed-subscribe/brikeng" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.email/brikeng', 'popupwindow')">
+          <input type="email" name="email" required
+            placeholder="seu@email.com"
+            data-pt-placeholder="seu@email.com"
+            data-en-placeholder="you@email.com">
+          <input type="text" name="metadata__company" required
+            placeholder="Empresa"
+            data-pt-placeholder="Empresa"
+            data-en-placeholder="Company">
+          <button type="submit" class="cta-button">
+            <span data-lang-pt>ASSINAR →</span><span data-lang-en>SUBSCRIBE →</span>
+          </button>
+        </form>
+      </div>
+
       <p style="margin-top:1rem; text-align:center;">
         <a href="https://brazilgrid.com" class="cta-button">
           <span data-lang-pt>ACESSAR BRAZILGRID →</span>
@@ -723,6 +763,10 @@ function setLang(lang) {
   if (ogt) ogt.setAttribute('content', meta.title);
   var ogd = document.querySelector('meta[property="og:description"]');
   if (ogd) ogd.setAttribute('content', meta.desc);
+  var phAttr = lang === 'en' ? 'data-en-placeholder' : 'data-pt-placeholder';
+  document.querySelectorAll('[' + phAttr + ']').forEach(function(el){
+    el.setAttribute('placeholder', el.getAttribute(phAttr));
+  });
   document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
   document.getElementById('btn-en').classList.toggle('active', lang === 'en');
 }
