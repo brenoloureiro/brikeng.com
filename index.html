@@ -793,6 +793,37 @@
       <button class="carousel-arrow carousel-arrow-next" type="button" data-carousel-next aria-label="Próximo">›</button>
       <div class="carousel-dots" data-carousel-dots></div>
     </div>
+
+    <div class="form-block">
+      <div class="form-block-title">
+        <span data-lang-pt>Solicite uma Proposta de O&amp;M</span><span data-lang-en>Request an O&amp;M Proposal</span>
+      </div>
+      <div class="form-block-desc">
+        <span data-lang-pt>Apresente seus parques, número de torres e contexto operacional. Retornamos com proposta customizada para o modelo que melhor se adapta à sua realidade — Enxuto, Híbrido ou Full-service.</span>
+        <span data-lang-en>Tell us about your assets, number of towers, and operational context. We'll return a customized proposal for the model best suited to your reality — Lean, Hybrid, or Full-service.</span>
+      </div>
+      <form action="https://formspree.io/f/mojyozev" method="POST">
+        <input type="email" name="email" required
+          placeholder="seu@email.com"
+          data-pt-placeholder="seu@email.com"
+          data-en-placeholder="you@email.com">
+        <input type="text" name="company" required
+          placeholder="Empresa"
+          data-pt-placeholder="Empresa"
+          data-en-placeholder="Company">
+        <input type="text" name="assets"
+          placeholder="Parques e número de torres (opcional)"
+          data-pt-placeholder="Parques e número de torres (opcional)"
+          data-en-placeholder="Assets and number of towers (optional)">
+        <textarea name="message" rows="3"
+          placeholder="Contexto e modelo de interesse"
+          data-pt-placeholder="Contexto e modelo de interesse"
+          data-en-placeholder="Context and model of interest"></textarea>
+        <button type="submit" class="cta-button">
+          <span data-lang-pt>SOLICITAR →</span><span data-lang-en>REQUEST →</span>
+        </button>
+      </form>
+    </div>
   </section>
 
   <div class="ascii-divider">─────────── ◆ ───────────</div>
