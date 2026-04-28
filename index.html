@@ -241,35 +241,40 @@
     box-shadow: 0 0 25px var(--accent-glow);
   }
 
-  /* MAINTENANCE HIGHLIGHT BOX (amber, mirrors brazilgrid-banner weight) */
-  .maintenance-highlight {
-    border: 2px solid var(--amber);
-    background: linear-gradient(135deg, rgba(232,168,56,0.08) 0%, rgba(232,168,56,0.02) 50%, transparent 100%);
-    padding: 2rem 1.5rem;
-    margin: 1rem 0 1.5rem;
-    text-align: center;
-    position: relative;
-    animation: pulse-border-amber 3s ease-in-out infinite;
-  }
-  @keyframes pulse-border-amber {
-    0%, 100% { border-color: rgba(232,168,56,0.55); box-shadow: 0 0 0 rgba(232,168,56,0.0); }
-    50% { border-color: var(--amber); box-shadow: 0 0 20px rgba(232,168,56,0.15); }
-  }
-  .maintenance-headline {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--amber);
-    letter-spacing: 0.05rem;
-    line-height: 1.3;
-    text-shadow: 0 0 20px rgba(232,168,56,0.18);
-  }
-  .maintenance-subhead {
+  /* MAINTENANCE CTA — compact link banner above the fold, links to #maintenance */
+  .maintenance-cta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid rgba(232,168,56,0.5);
+    border-left: 3px solid var(--amber);
+    background: linear-gradient(90deg, rgba(232,168,56,0.06) 0%, transparent 70%);
+    padding: 0.85rem 1rem;
+    margin-bottom: 1.5rem;
+    text-decoration: none;
     color: var(--text-bright);
-    font-size: 0.95rem;
-    margin-top: 1rem;
-    padding-top: 0.8rem;
-    border-top: 1px dashed rgba(232,168,56,0.25);
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
   }
+  .maintenance-cta:hover {
+    border-color: var(--amber);
+    background: linear-gradient(90deg, rgba(232,168,56,0.12) 0%, rgba(232,168,56,0.02) 70%);
+    text-shadow: none;
+    box-shadow: 0 0 12px rgba(232,168,56,0.18);
+  }
+  .maintenance-cta-text {
+    flex: 1;
+    font-size: 0.86rem;
+    line-height: 1.55;
+  }
+  .maintenance-cta-text strong { color: var(--amber); font-weight: 700; }
+  .maintenance-cta-arrow {
+    color: var(--amber);
+    font-size: 1.3rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .maintenance-cta:hover .maintenance-cta-arrow { transform: translateX(4px); }
 
   /* CAROUSEL — horizontal scroll-snap, JS adds arrows/dots when available */
   .carousel { position: relative; margin: 1rem 0 0.5rem; }
@@ -536,9 +541,9 @@
     .brazilgrid-banner { padding: 1.5rem 1rem; }
     .brazilgrid-banner-title { font-size: 1.2rem; }
     .brazilgrid-banner-waste .num { font-size: 1.3rem; }
-    .maintenance-highlight { padding: 1.5rem 1rem; }
-    .maintenance-headline { font-size: 1.2rem; }
-    .maintenance-subhead { font-size: 0.85rem; }
+    .maintenance-cta { padding: 0.75rem 0.85rem; gap: 0.7rem; }
+    .maintenance-cta-text { font-size: 0.8rem; }
+    .maintenance-cta-arrow { font-size: 1.15rem; }
   }
 
   /* FORMS */
@@ -611,6 +616,15 @@
       <span data-lang-en>20 years measuring, certifying, and developing wind and solar energy projects across Brazil. Now also helping generators and developers navigate the transition to storage.</span>
     </div>
   </header>
+
+  <!-- MAINTENANCE CTA -->
+  <a href="#maintenance" class="maintenance-cta">
+    <span class="maintenance-cta-text">
+      <span data-lang-pt>Curtailment chegou. Sua torre é o ativo que defende receita. <strong>Operação e manutenção adaptadas à nova realidade.</strong></span>
+      <span data-lang-en>Curtailment is here. Your tower is the asset that defends revenue. <strong>Operation and maintenance adapted to the new reality.</strong></span>
+    </span>
+    <span class="maintenance-cta-arrow" aria-hidden="true">→</span>
+  </a>
 
   <!-- BRAZILGRID BANNER -->
   <div class="brazilgrid-banner">
@@ -720,17 +734,6 @@
   <section class="section" id="maintenance">
     <span class="section-label">03</span>
     <h2><span data-lang-pt>Operação e Manutenção de Torres Anemométricas</span><span data-lang-en>Anemometric Tower Operation &amp; Maintenance</span></h2>
-
-    <div class="maintenance-highlight">
-      <div class="maintenance-headline">
-        <span data-lang-pt>Curtailment chegou. Sua torre é o ativo que defende receita.</span>
-        <span data-lang-en>Curtailment is here. Your tower is the asset that defends revenue.</span>
-      </div>
-      <div class="maintenance-subhead">
-        <span data-lang-pt>Operação e manutenção adaptadas à nova realidade.</span>
-        <span data-lang-en>Operation and maintenance adapted to the new reality.</span>
-      </div>
-    </div>
 
     <div class="carousel" data-carousel aria-roledescription="carousel">
       <button class="carousel-arrow carousel-arrow-prev" type="button" data-carousel-prev aria-label="Anterior">‹</button>
