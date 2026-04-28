@@ -241,6 +241,36 @@
     box-shadow: 0 0 25px var(--accent-glow);
   }
 
+  /* MAINTENANCE HIGHLIGHT BOX (amber, mirrors brazilgrid-banner weight) */
+  .maintenance-highlight {
+    border: 2px solid var(--amber);
+    background: linear-gradient(135deg, rgba(232,168,56,0.08) 0%, rgba(232,168,56,0.02) 50%, transparent 100%);
+    padding: 2rem 1.5rem;
+    margin: 1rem 0 1.5rem;
+    text-align: center;
+    position: relative;
+    animation: pulse-border-amber 3s ease-in-out infinite;
+  }
+  @keyframes pulse-border-amber {
+    0%, 100% { border-color: rgba(232,168,56,0.55); box-shadow: 0 0 0 rgba(232,168,56,0.0); }
+    50% { border-color: var(--amber); box-shadow: 0 0 20px rgba(232,168,56,0.15); }
+  }
+  .maintenance-headline {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--amber);
+    letter-spacing: 0.05rem;
+    line-height: 1.3;
+    text-shadow: 0 0 20px rgba(232,168,56,0.18);
+  }
+  .maintenance-subhead {
+    color: var(--text-bright);
+    font-size: 0.95rem;
+    margin-top: 1rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed rgba(232,168,56,0.25);
+  }
+
   /* NAV */
   .nav {
     margin-bottom: 2rem;
@@ -401,6 +431,9 @@
     .brazilgrid-banner { padding: 1.5rem 1rem; }
     .brazilgrid-banner-title { font-size: 1.2rem; }
     .brazilgrid-banner-waste .num { font-size: 1.3rem; }
+    .maintenance-highlight { padding: 1.5rem 1rem; }
+    .maintenance-headline { font-size: 1.2rem; }
+    .maintenance-subhead { font-size: 0.85rem; }
   }
 
   /* FORMS */
@@ -573,6 +606,25 @@
       <div class="service-desc">
         <span data-lang-pt>Plataforma de analytics para o setor elétrico brasileiro. Curtailment, previsão de geração e preço com machine learning, dashboards em tempo real e mapeamento de exposição corporativa. Acesse em <a href="https://brazilgrid.com">brazilgrid.com</a>.</span>
         <span data-lang-en>Analytics platform for the Brazilian power sector. Curtailment analytics, generation and price forecasting with machine learning, real-time dashboards, and corporate exposure mapping. Visit <a href="https://brazilgrid.com">brazilgrid.com</a>.</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="ascii-divider">─────────── ◆ ───────────</div>
+
+  <!-- MAINTENANCE -->
+  <section class="section" id="maintenance">
+    <span class="section-label">03</span>
+    <h2><span data-lang-pt>Operação e Manutenção de Torres Anemométricas</span><span data-lang-en>Anemometric Tower Operation &amp; Maintenance</span></h2>
+
+    <div class="maintenance-highlight">
+      <div class="maintenance-headline">
+        <span data-lang-pt>Curtailment chegou. Sua torre é o ativo que defende receita.</span>
+        <span data-lang-en>Curtailment is here. Your tower is the asset that defends revenue.</span>
+      </div>
+      <div class="maintenance-subhead">
+        <span data-lang-pt>Operação e manutenção adaptadas à nova realidade.</span>
+        <span data-lang-en>Operation and maintenance adapted to the new reality.</span>
       </div>
     </div>
   </section>
