@@ -271,6 +271,111 @@
     border-top: 1px dashed rgba(232,168,56,0.25);
   }
 
+  /* CAROUSEL — horizontal scroll-snap, JS adds arrows/dots when available */
+  .carousel { position: relative; margin: 1rem 0 0.5rem; }
+  .carousel-track {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.6rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-bright) transparent;
+  }
+  .carousel-track::-webkit-scrollbar { height: 6px; }
+  .carousel-track::-webkit-scrollbar-track { background: transparent; }
+  .carousel-track::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 3px; }
+  .carousel-card {
+    flex: 0 0 100%;
+    min-width: 0;
+    scroll-snap-align: start;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    padding: 1.2rem;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+  .carousel-card:hover { border-color: var(--accent-dim); }
+  .carousel-card-tag {
+    font-size: 0.68rem;
+    color: var(--comment);
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .carousel-card-title {
+    color: var(--cyan);
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.02rem;
+    line-height: 1.3;
+  }
+  .carousel-card-title::before { content: '→ '; color: var(--accent); }
+  .carousel-card-body {
+    color: var(--text);
+    font-size: 0.82rem;
+    line-height: 1.65;
+  }
+  .carousel-card[data-emphasis] { border-color: var(--amber); }
+  .carousel-card[data-emphasis] .carousel-card-title { color: var(--amber); }
+  .carousel-card[data-emphasis] .carousel-card-title::before { color: var(--amber); }
+  .carousel-card[data-emphasis] .carousel-card-tag { color: var(--amber); }
+
+  /* Arrows — only visible when JS upgrades the carousel */
+  .carousel-arrow {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-bright);
+    color: var(--accent);
+    font-family: inherit;
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: all 0.2s;
+    border-radius: 50%;
+  }
+  .carousel-arrow:hover { border-color: var(--accent); box-shadow: 0 0 12px var(--accent-glow); }
+  .carousel-arrow:disabled { opacity: 0.25; cursor: not-allowed; box-shadow: none; }
+  .carousel-arrow-prev { left: -14px; }
+  .carousel-arrow-next { right: -14px; }
+  .carousel.is-enhanced .carousel-arrow { display: flex; }
+  @media (max-width: 600px) {
+    .carousel.is-enhanced .carousel-arrow { display: none; }
+  }
+
+  /* Dots */
+  .carousel-dots {
+    display: none;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+  }
+  .carousel.is-enhanced .carousel-dots { display: flex; }
+  .carousel-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--border);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .carousel-dot:hover { background: var(--accent-dim); }
+  .carousel-dot.is-active { background: var(--accent); box-shadow: 0 0 8px var(--accent-glow); }
+
   /* NAV */
   .nav {
     margin-bottom: 2rem;
@@ -627,6 +732,67 @@
         <span data-lang-en>Operation and maintenance adapted to the new reality.</span>
       </div>
     </div>
+
+    <div class="carousel" data-carousel aria-roledescription="carousel">
+      <button class="carousel-arrow carousel-arrow-prev" type="button" data-carousel-prev aria-label="Anterior">‹</button>
+      <div class="carousel-track" data-carousel-track tabindex="0">
+
+        <article class="carousel-card" data-emphasis>
+          <div class="carousel-card-tag">
+            <span data-lang-pt>O contexto</span><span data-lang-en>The context</span>
+          </div>
+          <div class="carousel-card-title">
+            <span data-lang-pt>Sem Medição, Sem Ressarcimento</span><span data-lang-en>No Measurement, No Compensation</span>
+          </div>
+          <div class="carousel-card-body">
+            <span data-lang-pt>Curtailment chegou e a tendência é piorar nos próximos anos. É hora de se adaptar à nova realidade. Reduzir custo operacional é necessário, mas cada hora de torre anemométrica fora de operação compromete a base de cálculo da geração de referência e sem ela não há ressarcimento. A torre deixou de ser custo e virou ativo crítico de receita. A seguir nossos modelos de manutenção de torres anemométricas adequados para sua realidade.</span>
+            <span data-lang-en>Curtailment is here and the trend is worsening. Time to adapt to the new reality. Cutting operational costs is necessary, but every hour of anemometric tower downtime compromises the reference generation baseline, and without it there's no compensation. The tower is no longer a cost — it's critical revenue infrastructure. Below are our maintenance models for anemometric towers, tailored to your reality.</span>
+          </div>
+        </article>
+
+        <article class="carousel-card">
+          <div class="carousel-card-tag">
+            <span data-lang-pt>Modelo 01</span><span data-lang-en>Model 01</span>
+          </div>
+          <div class="carousel-card-title">
+            <span data-lang-pt>Modelo Enxuto</span><span data-lang-en>Lean Model</span>
+          </div>
+          <div class="carousel-card-body">
+            <span data-lang-pt>Treinamento da equipe interna do parque + auditoria periódica BRIK. Cliente assume preventivas e corretivas; BRIK garante qualidade técnica via treinamento inicial, auditoria trimestral ou semestral e suporte a casos críticos sob demanda. Para quem decidiu internalizar totalmente.</span>
+            <span data-lang-en>Training for the asset's internal team + periodic BRIK audits. The client takes over preventive and corrective work; BRIK ensures technical quality through initial training, quarterly or semi-annual audits, and on-demand support for critical cases. For those who decided to fully internalize.</span>
+          </div>
+        </article>
+
+        <article class="carousel-card">
+          <div class="carousel-card-tag">
+            <span data-lang-pt>Modelo 02</span><span data-lang-en>Model 02</span>
+          </div>
+          <div class="carousel-card-title">
+            <span data-lang-pt>Modelo Híbrido</span><span data-lang-en>Hybrid Model</span>
+          </div>
+          <div class="carousel-card-body">
+            <span data-lang-pt>Divisão de responsabilidades em valor fixo mensal previsível. Cliente faz preventiva de rotina; BRIK assume corretivas, apoio remoto à equipe interna e auditoria periódica. Modelo de parceria: custo previsível, risco compartilhado. Para quem decidiu internalizar parcialmente.</span>
+            <span data-lang-en>Shared responsibilities under a predictable monthly fixed fee. The client handles routine preventive work; BRIK takes on corrective tasks, remote support for the internal team, and periodic audits. Partnership model: predictable cost, shared risk. For those who decided to partially internalize.</span>
+          </div>
+        </article>
+
+        <article class="carousel-card">
+          <div class="carousel-card-tag">
+            <span data-lang-pt>Modelo 03</span><span data-lang-en>Model 03</span>
+          </div>
+          <div class="carousel-card-title">
+            <span data-lang-pt>Modelo Full-service</span><span data-lang-en>Full-service Model</span>
+          </div>
+          <div class="carousel-card-body">
+            <span data-lang-pt>BRIK responsável por toda manutenção das torres. Cliente foca em geração; BRIK garante medição, telemetria, disponibilidade e qualidade dos dados. Para quem decidiu não internalizar.</span>
+            <span data-lang-en>BRIK takes full responsibility for tower maintenance. The client focuses on generation; BRIK ensures measurement, telemetry, data availability and quality. For those who decided not to internalize.</span>
+          </div>
+        </article>
+
+      </div>
+      <button class="carousel-arrow carousel-arrow-next" type="button" data-carousel-next aria-label="Próximo">›</button>
+      <div class="carousel-dots" data-carousel-dots></div>
+    </div>
   </section>
 
   <div class="ascii-divider">─────────── ◆ ───────────</div>
@@ -806,6 +972,72 @@ function setLang(lang) {
   var u='breno',d='brikeng.com',e=u+'@'+d;
   var el=document.getElementById('email-link');
   if(el){el.href='mailto:'+e;el.textContent=e;}
+})();
+
+// Carousel — progressive enhancement on top of native scroll-snap
+(function(){
+  document.querySelectorAll('[data-carousel]').forEach(function(carousel){
+    var track = carousel.querySelector('[data-carousel-track]');
+    var prevBtn = carousel.querySelector('[data-carousel-prev]');
+    var nextBtn = carousel.querySelector('[data-carousel-next]');
+    var dotsContainer = carousel.querySelector('[data-carousel-dots]');
+    if (!track) return;
+    var cards = track.querySelectorAll('.carousel-card');
+    if (!cards.length) return;
+
+    carousel.classList.add('is-enhanced');
+
+    var dots = [];
+    if (dotsContainer) {
+      for (var i = 0; i < cards.length; i++) {
+        (function(idx){
+          var dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'carousel-dot';
+          dot.setAttribute('aria-label', 'Slide ' + (idx + 1));
+          dot.addEventListener('click', function(){ scrollToIndex(idx); });
+          dotsContainer.appendChild(dot);
+          dots.push(dot);
+        })(i);
+      }
+    }
+
+    function getCurrentIndex(){
+      var w = track.clientWidth;
+      if (!w) return 0;
+      return Math.round(track.scrollLeft / w);
+    }
+    function scrollToIndex(idx){
+      var w = track.clientWidth;
+      var max = cards.length - 1;
+      if (idx < 0) idx = 0;
+      if (idx > max) idx = max;
+      track.scrollTo({ left: w * idx, behavior: 'smooth' });
+    }
+    function update(){
+      var idx = getCurrentIndex();
+      for (var i = 0; i < dots.length; i++) {
+        dots[i].classList.toggle('is-active', i === idx);
+      }
+      if (prevBtn) prevBtn.disabled = (idx <= 0);
+      if (nextBtn) nextBtn.disabled = (idx >= cards.length - 1);
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', function(){ scrollToIndex(getCurrentIndex() - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function(){ scrollToIndex(getCurrentIndex() + 1); });
+
+    var scrollTimer;
+    track.addEventListener('scroll', function(){
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(update, 80);
+    });
+    window.addEventListener('resize', function(){
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(update, 120);
+    });
+
+    update();
+  });
 })();
 </script>
 
