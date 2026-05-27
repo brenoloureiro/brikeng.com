@@ -553,22 +553,6 @@
     .maintenance-cta-arrow { font-size: 1.15rem; }
   }
 
-  /* FORMS */
-  .form-block { margin-top: 1.2rem; padding-top: 1rem; border-top: 1px dashed var(--border); }
-  .form-block-title { color: var(--amber); font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; }
-  .form-block-title::before { content: '// '; color: var(--comment); }
-  .form-block-desc { font-size: 0.8rem; margin-bottom: 0.8rem; color: var(--text); }
-  .form-block form { display: flex; flex-direction: column; gap: 0.5rem; }
-  .form-block input, .form-block textarea {
-    font-family: inherit; font-size: 0.85rem; background: var(--bg);
-    border: 1px solid var(--border); color: var(--text-bright); padding: 0.5rem 0.7rem;
-  }
-  .form-block input:focus, .form-block textarea:focus {
-    outline: none; border-color: var(--accent-dim); box-shadow: 0 0 8px var(--accent-glow);
-  }
-  .form-block input::placeholder, .form-block textarea::placeholder { color: var(--comment); }
-  button.cta-button { background: transparent; cursor: pointer; margin-top: 0.4rem; align-self: flex-start; }
-
   ::selection { background: var(--accent); color: var(--bg); }
 
   @media print {
@@ -806,36 +790,6 @@
       <div class="carousel-dots" data-carousel-dots></div>
     </div>
 
-    <div class="form-block">
-      <div class="form-block-title">
-        <span data-lang-pt>Solicite uma Proposta de O&amp;M</span><span data-lang-en>Request an O&amp;M Proposal</span>
-      </div>
-      <div class="form-block-desc">
-        <span data-lang-pt>Informe seus parques e número de torres.</span>
-        <span data-lang-en>Tell us your assets and number of towers.</span>
-      </div>
-      <form action="https://formspree.io/f/mojyozev" method="POST">
-        <input type="email" name="email" required
-          placeholder="Seu e-mail"
-          data-pt-placeholder="Seu e-mail"
-          data-en-placeholder="Your email">
-        <input type="text" name="company" required
-          placeholder="Empresa"
-          data-pt-placeholder="Empresa"
-          data-en-placeholder="Company">
-        <input type="text" name="assets"
-          placeholder="Parques e número de torres (opcional)"
-          data-pt-placeholder="Parques e número de torres (opcional)"
-          data-en-placeholder="Assets and number of towers (optional)">
-        <textarea name="message" rows="3"
-          placeholder="Contexto e modelo de interesse"
-          data-pt-placeholder="Contexto e modelo de interesse"
-          data-en-placeholder="Context and model of interest"></textarea>
-        <button type="submit" class="cta-button">
-          <span data-lang-pt>SOLICITAR →</span><span data-lang-en>REQUEST →</span>
-        </button>
-      </form>
-    </div>
   </section>
 
   <div class="ascii-divider">─────────── ◆ ───────────</div>
@@ -865,32 +819,6 @@
       </div>
     </div>
 
-    <div class="form-block">
-      <div class="form-block-title">
-        <span data-lang-pt>Solicite uma Análise Piloto BESS para sua Usina</span><span data-lang-en>Request a Pilot BESS Analysis for Your Asset</span>
-      </div>
-      <form action="https://formspree.io/f/xrervawb" method="POST">
-        <input type="email" name="email" required
-          placeholder="Seu e-mail"
-          data-pt-placeholder="Seu e-mail"
-          data-en-placeholder="Your email">
-        <input type="text" name="company" required
-          placeholder="Empresa"
-          data-pt-placeholder="Empresa"
-          data-en-placeholder="Company">
-        <input type="text" name="asset"
-          placeholder="Usina ou portfólio (opcional)"
-          data-pt-placeholder="Usina ou portfólio (opcional)"
-          data-en-placeholder="Asset or portfolio (optional)">
-        <textarea name="message" rows="3"
-          placeholder="Contexto e o que gostaria de analisar"
-          data-pt-placeholder="Contexto e o que gostaria de analisar"
-          data-en-placeholder="Context and what you'd like to analyze"></textarea>
-        <button type="submit" class="cta-button">
-          <span data-lang-pt>SOLICITAR →</span><span data-lang-en>REQUEST →</span>
-        </button>
-      </form>
-    </div>
   </section>
 
 
